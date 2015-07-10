@@ -1,20 +1,25 @@
 
 #10 digit binary to decimal conversion python code
 
-b = "0010100110"
+import sys # Command line arguments
+import re # regex
 
-c = b[9]
-d = b[8]
-e = b[7]
-f = b[6]
-g = b[5]
-h = b[4]
-i = b[3]
-j = b[2]
-k = b[1]
-l = b[0]
+# beginning of the string [01] set of characters occurs one or more times at the end of the string
+# re.serach function checks whether the input is 1 or 0
+# % replace
 
-bin2dec = float(c)*(2**0)+float(d)*(2**1)+float(e)*(2**2)+float(f)*(2**3)+float(g)*(2**4)+float(h)*(2**5)+float(i)*(2**6)+float(j)*(2**7)+float(k)*(2**8)+float(l)*(2**9)
+if len(sys.argv) != 2 or not re.search('^[01]+$', sys.argv[1]) :
+    print "Usage %s <binary_number>" % (sys.argv[0])
+    print "  Print a number in binary"
+    sys.exit(-1)
 
-print bin2dec
-    
+b = sys.argv[1]
+print "b = 0b"+b
+
+d = 0
+
+for i in range(len(b)):
+    if b[len(b)-i-1] == "1":
+        d += 2**i
+
+print "d = "+str(d)
